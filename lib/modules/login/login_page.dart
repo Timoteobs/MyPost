@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mypost/modules/login/login_controller.dart';
 import 'package:mypost/shared/social_login/social_login_button.dart';
 import 'package:mypost/shared/themes/app_colors.dart';
 import 'package:mypost/shared/themes/app_image.dart';
@@ -13,6 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final controller = LoginController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -59,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           const EdgeInsets.only(left: 40, right: 40, top: 40),
                       child: SocialLoginButton(
                         onTap: () {
-                          print("Chama");
+                          controller.googleSignIn(context);
                         },
                       ),
                     ),

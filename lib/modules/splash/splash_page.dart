@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mypost/shared/auth/auth_contoller.dart';
 import 'package:mypost/shared/themes/app_colors.dart';
 import 'package:mypost/shared/themes/app_image.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({ Key? key }) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final authController = AuthController();
+    authController.currentUser(context);
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
