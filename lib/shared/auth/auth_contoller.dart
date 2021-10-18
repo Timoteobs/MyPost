@@ -8,11 +8,19 @@ class AuthController {
 
   UserModel get user => _user!;
 
+  Future getUSer() async {
+    final instance = await SharedPreferences.getInstance();
+    if (instance.containsKey("user")) {
+      final json = instance.get("user") as String;
+      return UserModel.fromJson(json);
+    }
+  }
+
   void setUser(BuildContext context, UserModel? user) {
     if (user != null) {
       saveUser(user);
       _user = user;
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/tabs");
     } else {
       Navigator.pushReplacementNamed(context, "/login");
     }
@@ -34,5 +42,12 @@ class AuthController {
     } else {
       setUser(context, null);
     }
+  }
+
+  Future<void> logout(BuildContext context) async {
+    final instance = await SharedPreferences.getInstance();
+    await instance.clear();
+    setUser(context, null);
+    return;
   }
 }
